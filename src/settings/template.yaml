@@ -20,4 +20,4 @@ Resources:
 Outputs:
   CreateTenant:
     Description: "CreateTenant Lambda Function ARN"
-    Value: !GetAtt UsersModule.Outputs.CreateTenant
+    Value: !GetAtt TenantModule.Outputs.CreateTenant
