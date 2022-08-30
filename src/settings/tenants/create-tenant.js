@@ -15,8 +15,7 @@ exports.lambdaHandler = async (event) => {
     const item = {
         id: AWS.util.uuid.v4(),
         name: name,
-        date: date.toLocaleDateString(),
-        tableName: TABLE_NAME
+        date: date.toLocaleDateString()
     }
 
     console.log(item);
