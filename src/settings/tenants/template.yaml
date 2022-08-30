@@ -15,7 +15,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: create-tenant.lambda_handler
+      Handler: create-tenant.lambdaHandler
+      # Layers:
+      #   - !Ref libs
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref TenantsTable
@@ -25,7 +27,33 @@ Resources:
 
 
   TenantsTable:
-    Type: AWS::Serverless::SimpleTable
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "TenantsTable"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+        - AttributeName: "name"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "id"
+          KeyType: "HASH"
+        - 
+          AttributeName: "name"
+          KeyType: "RANGE"
+
+  # libs:
+  #   Type: AWS::Lambda::LayerVersion
+  #   Properties:
+  #     LayerName: blank-nodejs-lib
+  #     Description: Dependencies for the blank sample app.
+  #     Content:
+  #       S3Bucket: my-bucket-region-123456789012
+  #       S3Key: layer.zip
+  #     CompatibleRuntimes:
+  #       - nodejs16.x   
 
 
 Outputs:

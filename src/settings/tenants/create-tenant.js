@@ -1,3 +1,5 @@
+// const { v4: uuidv4 } = require('uuid');
+
 const AWS = require('aws-sdk');
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
@@ -8,10 +10,13 @@ exports.lambdaHandler = async (event) => {
 
     const name = event.queryStringParameters.name;
 
+    const date = new Date();
+
     const item = {
-        id: name,
+        id: AWS.util.uuid.v4(),
         name: name,
-        date: Date.now()
+        date: date.toLocaleDateString(),
+        tableName: TABLE_NAME
     }
 
     console.log(item);
@@ -20,31 +25,9 @@ exports.lambdaHandler = async (event) => {
 
     return {
         statusCode: 200,
+        // body: JSON.stringify(item),
         body: JSON.stringify(savedItem),
       }
-}
-
-exports.getHello = async (event) => {
-    const name = event.queryStringParameters.name;
-
-    try {
-        const item = await getItem(name);
-        console.log(item);
-    
-        if (item.date) {
-            const d = new Date(item.date);
-            
-            return {
-                statusCode: 200,
-                body: `Was greeted on ${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
-            }
-        }
-    } catch (e) {
-        return {
-            statusCode: 200,
-            body: 'Nobody was greeted with that name'
-        }
-    }
 }
 
 async function saveItem(item) {
@@ -55,25 +38,11 @@ async function saveItem(item) {
 
     console.log(params)
     
+    // return dynamo.put(params).promise().then(() => {
+    //     return item;
+    // });
+
     return dynamo.put(params).promise().then(() => {
         return item;
-    });
-};
-
-async function getItem (name) {
-    console.log('getItem');
-    
-    const params = {
-      Key: {
-        id: name,
-      },
-      TableName: TABLE_NAME
-    };
-
-    console.log(params);
-  
-    return dynamo.get(params).promise().then(result => {
-        console.log(result);
-        return result.Item;
     });
 };
