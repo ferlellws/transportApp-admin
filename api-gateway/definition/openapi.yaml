@@ -5,12 +5,9 @@ info:
 servers:
   - url: /Prod
 paths:
-  /tenants/new:
+  /tenants:
     post:
-      summary: Crea a un tenant
-      description: "Con este endpoint se crea un tenant"
       x-amazon-apigateway-integration:
-        type: aws
         credentials:
           Fn::GetAtt:
             - ApiGwExecutionRole
