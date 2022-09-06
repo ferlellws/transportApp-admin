@@ -17,6 +17,7 @@ AWS.config.update({
 exports.lambdaHandler = async (event) => {
     const tenant = event.queryStringParameters.tenant;
     const environment = event.queryStringParameters.environment;
+    const emailAdmin = event.queryStringParameters.email_admin;
 
     const date = new Date();
 
@@ -57,14 +58,15 @@ exports.lambdaHandler = async (event) => {
         //     ]
         // }
         // await saveUserCognito(userSuperAdmin);
+        const tenantNormalize = getTenantNormalize(tenant);
 
         const userAdmin = {
             UserPoolId: process.env.USER_POOL_ID,
-            Username: 'admin',
+            Username: 'admin_' + tenantNormalize,
             UserAttributes: [
                 {
                     Name: 'email',
-                    Value: 'ferlellws@gmail.com'
+                    Value: emailAdmin
                 },
                 {
                     Name: 'custom:tenant',
@@ -121,4 +123,9 @@ async function saveItem(item) {
 async function saveUserCognito(user) {
     const result = await cognito.adminCreateUser(user).promise();
     return result;
+}
+
+function getTenantNormalize(tenant) {
+    tenant = tenant.replace('-', '_');
+    return tenant;
 }

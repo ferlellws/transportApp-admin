@@ -9,13 +9,6 @@ paths:
     post:
       summary: Crea a un tenant
       description: "Con este endpoint se crea un tenant"
-      responses:
-        "200":
-          description: Tenant creado exitosamente
-        "400":
-          description: Bad reqeust
-        "500":
-          description: Server Error
       x-amazon-apigateway-integration:
         type: aws
         credentials:
