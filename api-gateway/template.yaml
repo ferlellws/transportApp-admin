@@ -16,6 +16,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       Name: !Sub ${AWS::StackName}-admin-api-gateway
+      Description: "API Gateway de la aplicación administrativa del aplicativo de transporte"
       StageName: Prod
 #      MethodSettings:
 #        - HttpMethod: "*"
@@ -24,7 +25,7 @@ Resources:
 #          MetricsEnabled: true
       Cors:
         AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowHeaders: "'Content-Type'"
         AllowOrigin: "'*'"
 #        MaxAge: "'600'"
       DefinitionBody:
@@ -50,16 +51,12 @@ Resources:
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
-#              - Action: sqs:SendMessage
-#                Effect: Allow
-#                Resource:
-#                  - Ref: OrderQueueArn
               - Action: lambda:*
                 Effect: Allow
                 Resource:
                   - Ref: CreateTenant
 
 Outputs:
-  TransportAppApiEndpoint:
+  TransportAppAdminApiEndpoint:
     Description: "API Gateway endpoint URL for Prod stage for transport App admin"
     Value: !Sub "https://${TransportAppAdminApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

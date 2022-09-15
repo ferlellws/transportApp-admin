@@ -14,10 +14,9 @@ Resources:
   CreateTenant:
     Type: AWS::Serverless::Function
     Properties:
+      Description: Función para crear tenant
       CodeUri: ./
       Handler: create-tenant.lambdaHandler
-      # Layers:
-      #   - !Ref libs
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref TenantsTable

@@ -5,9 +5,19 @@ info:
 servers:
   - url: /Prod
 paths:
-  /tenants:
+  /tenants/new:
     post:
+      summary: Crea a un usuario
+      description: "Con este endpoint se crea un usuario"
+      responses:
+        "200":
+          description: Usuario creado exitosamente
+        "400":
+          description: Bad request
+        "500":
+          description: Server Error
       x-amazon-apigateway-integration:
+        type: aws_proxy
         credentials:
           Fn::GetAtt:
             - ApiGwExecutionRole

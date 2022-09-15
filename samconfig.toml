@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "base-app"
+stack_name = "base-admin-transport"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-jq1nr4tbelwj"
-s3_prefix = "base-app"
+s3_prefix = "base-admin-transport"
 region = "us-east-1"
 profile = "transportApp"
 confirm_changeset = true
