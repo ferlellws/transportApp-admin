@@ -5,7 +5,7 @@ Esta es la base para el backend del aplicativo de transporte SaaS para crear los
 
 El aplicativo está implementado con arquitectura serverless con el uso de la nube de AWS y programado en el lenguaje Nodejs 16.
 
-![Arquitectura BabyGift](BabyGift-Arquitectura.jpeg)
+![Arquitectura BabyGift](Transportapp-Arquitectura.jpeg)
 
 El backend está construido por microservicios con el uso de funciones Lambd (Nodejs 16), API Gateway, Cognito (Gestor de usuarios y permisos) y DynamoDB.
 
