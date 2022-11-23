@@ -1,18 +1,11 @@
 # transportApp
-This is an AWS SAM app that uses Rekognition APIs to detect text in S3 Objects and stores labels in DynamoDB.
+Esta es la base para el backend del aplicativo de transporte SaaS para crear los tenants.
 
-## Project structure
-Here is a brief overview of what we have generated for you.
-```bash
-.
-├── README.md                   <-- This instructions file
-├── src                         <-- Source code for the Lambda function
-│   ├── __init__.py
-│   └── app.py                  <-- Lambda function code
-├── template.yaml               <-- SAM template
-└── SampleEvent.json            <-- Sample S3 event
-```
+## Arquitectura
 
+El aplicativo está implementado con arquitectura serverless con el uso de la nube de AWS.
+
+[!Alt text](../../../Downloads/Arquitectura%20BabyGift-Arquitectura%20BabyGift.jpeg)
 
 ## Requirements
 * AWS CLI
